@@ -1,2 +1,7 @@
-# photo_zone_system
-[연구과제] 포토존 앞에 서있는 사람 탐지해서 친구, 연인, 가족에 따라 배경 자동으로 바꿔주기
+# Stack
+1. __Android__
+    - lang: `kotlin`
+2. __IOS__
+    - lang: `swift`
+3. __AI Deep-Learning__
+    - lang: `python`
