@@ -1,8 +1,7 @@
 import socket
 from _thread import *
 
-# server IP, PORT
-HOST_IP = '192.168.0.2'
+# server PORT
 HOST_PORT = 8995
 
 # 서버에 접속한 클라이언트 목록
@@ -43,7 +42,7 @@ def threaded(client_socket, addr):
 print('>> Server Start')
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-server_socket.bind((HOST_IP, HOST_PORT))
+server_socket.bind(('', HOST_PORT))
 server_socket.listen()
 
 # 클라이언트 접속 시 accept 함수에서 새로운 소켓 리턴
