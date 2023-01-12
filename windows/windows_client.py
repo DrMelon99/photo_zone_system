@@ -31,7 +31,11 @@ def recv_data(client_socket) :
         if data.decode() == '0':
             image_output(image_path, 'init_image', '.jpg')
         elif data.decode() == '1':
-            image_output(image_path, 'test_image', '.jpg')
+            image_output(image_path, 'ocean_image', '.jpg')
+        elif data.decode() == '2':
+            image_output(image_path, 'couple_image', '.jpg')
+        elif data.decode() == '3':
+            image_output(image_path, 'family_image', '.jpg')
 
 start_new_thread(recv_data, (client_socket,))
 print ('>> Connect Server')
