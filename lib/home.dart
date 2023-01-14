@@ -7,6 +7,7 @@ import 'dart:io';
 
 var socket;
 bool connect_state = false;
+String image_path = "";
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -57,7 +58,15 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Expanded(
-              child: Container(),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: IconButton(
+                  icon: (image_path == "")
+                      ? Icon(Icons.image)
+                      : Image.asset(image_path),
+                  onPressed: () {},
+                ),
+              ),
             ),
             Container(
               margin: EdgeInsets.all(5),
@@ -93,7 +102,10 @@ class _HomeState extends State<Home> {
             border: Border.all(width: 2, color: Colors.grey)),
         child: IconButton(
             onPressed: () {
-              print(path);
+              setState(() {
+                image_path = path;
+                print(path);
+              });
             },
             icon: Image.asset(path)));
   }
