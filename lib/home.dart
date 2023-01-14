@@ -54,20 +54,48 @@ class _HomeState extends State<Home> {
         ],
       ),
       body: Container(
-        child: Center(
-            child: Column(
+        child: Column(
           children: [
-            TextButton(onPressed: () async {}, child: Text("button")),
-            TextButton(
-              onPressed: () {
-                setState(() {});
-              },
-              child: Text("close"),
-            )
+            Expanded(
+              child: Container(),
+            ),
+            Container(
+              margin: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(width: 2, color: Colors.black)),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    image_button('images/init_image.jpg'),
+                    image_button('images/ocean_image.jpg'),
+                    image_button('images/couple_image.jpg'),
+                    image_button('images/family_image.jpg'),
+                  ],
+                ),
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 80))
           ],
-        )),
+        ),
       ),
     );
+  }
+
+  Widget image_button(String path) {
+    return Container(
+        width: 100,
+        height: 70,
+        margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(width: 2, color: Colors.grey)),
+        child: IconButton(
+            onPressed: () {
+              print(path);
+            },
+            icon: Image.asset(path)));
   }
 
   void show_snackbar(String text) {
