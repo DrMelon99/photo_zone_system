@@ -5,6 +5,8 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'dart:io';
 
+String host_ip = "192.168.0.29";
+int host_port = 8995;
 var socket;
 bool connect_state = false;
 String image_path = "";
@@ -41,7 +43,7 @@ class _HomeState extends State<Home> {
           IconButton(
               onPressed: () async {
                 if (!connect_state) {
-                  socket = await Socket.connect('192.168.0.4', 8995);
+                  socket = await Socket.connect(host_ip, host_port);
                   setState(() {
                     connect_state = true;
                     socket_send_data('smart-phone');
