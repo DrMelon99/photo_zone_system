@@ -6,9 +6,16 @@ HOST_PORT = 8995
 
 # 서버에 접속한 클라이언트 목록
 client_sockets = []
+# SmartPhonePort
+client_spp = ""
+SMART_PHONE = False
+
+# AIPort
+client_aip = ""
 
 # 접속한 클라이언트마다 새로운 쓰레드가 생성되어 통신
 def threaded(client_socket, addr):
+    global client_spp, client_aip,SMART_PHONE
     print('>> Connected by :', addr[0], ':', addr[1])
 
     # 클라이언트가 접속을 끊을 때 까지 반복
@@ -19,20 +26,30 @@ def threaded(client_socket, addr):
 
             if not data:
                 print('>> Disconnected by ' + addr[0], ':', addr[1])
+                if addr[1] == client_spp:
+                    SMART_PHONE = False
                 break
             print('>> Received from ' + addr[0], ':', addr[1], data.decode())
+            if SMART_PHONE and client_aip == addr[1]:
+                continue
+            
+            if data.decode() == "smart-phone":
+                client_spp = addr[1]
+                SMART_PHONE = True
+
+            if data.decode() == "AI":
+                client_aip = addr[1]
 
             # 서버에 접속한 클라이언트들에게 채팅 보내기
-            for client in client_sockets :
-                # 메세지를 보낸 본인을 제외한 서버에 접속한 클라이언트에게 메세지 보내기
-                if client != client_socket :
+            for client in client_sockets:
+                if client != client_socket:
                     client.send(data)
 
         except ConnectionResetError as e:
             print('>> Disconnected by ' + addr[0], ':', addr[1])
             break
 
-    if client_socket in client_sockets :
+    if client_socket in client_sockets:
         client_sockets.remove(client_socket)
         print('remove client list : ',len(client_sockets))
 

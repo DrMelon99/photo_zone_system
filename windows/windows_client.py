@@ -2,11 +2,12 @@ import cv2
 import socket
 from _thread import *
 
-HOST_IP = '192.168.0.4'
+HOST_IP = '192.168.0.29'
 HOST_PORT = 8995
 
 # 주소 체계(address family)로 IPv4, 소켓 타입으로 TCP 사용합니다.
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
 client_socket.connect((HOST_IP, HOST_PORT))
 client_socket.sendall('back-pannel'.encode())
 

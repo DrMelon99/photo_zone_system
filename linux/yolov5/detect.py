@@ -40,7 +40,7 @@ import cv2
 import socket
 from _thread import *
 
-HOST_IP = '192.168.0.4'
+HOST_IP = '192.168.0.29'
 HOST_PORT = 8995
 
 # 주소 체계(address family)로 IPv4, 소켓 타입으로 TCP 사용합니다.
@@ -51,6 +51,7 @@ client_socket.sendall('AI'.encode())
 # 서버로부터 메세지를 받는 메소드
 # 스레드로 구동 시켜, 메세지를 보내는 코드와 별개로 작동하도록 처리
 def recv_data(client_socket) :
+    global DATA_BUFFER
     while True :
         data = client_socket.recv(1024)
         print("recive : ", data.decode())
@@ -228,10 +229,12 @@ def run(
         # Print time (inference-only)
         # LOGGER.info(f"{s}{'' if len(det) else '(no detections), '}{dt[1].dt * 1E3:.1f}ms")
         print(s)
+    
         if 'person' in s:
             client_socket.send('1'.encode())
         else:
             client_socket.send('0'.encode())
+
     # Print results
     t = tuple(x.t / seen * 1E3 for x in dt)  # speeds per image
     LOGGER.info(f'Speed: %.1fms pre-process, %.1fms inference, %.1fms NMS per image at shape {(1, 3, *imgsz)}' % t)
