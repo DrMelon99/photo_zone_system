@@ -35,5 +35,11 @@ while webcam.isOpened():
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+while True:
+    message = input('')
+    if message == 'quit':
+        close_data = message
+        break
+    client_socket.send(message.encode())
 webcam.release()
 cv2.destroyAllWindows()

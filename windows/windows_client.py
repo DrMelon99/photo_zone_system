@@ -7,8 +7,10 @@ HOST_PORT = 8995
 
 # 주소 체계(address family)로 IPv4, 소켓 타입으로 TCP 사용합니다.
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+
 client_socket.connect((HOST_IP, HOST_PORT))
 client_socket.sendall('back-pannel'.encode())
+
 
 # image path & name & extension
 image_path = 'D:/github/photo_zone_system/windows/images/'
@@ -39,5 +41,11 @@ def recv_data(client_socket) :
 start_new_thread(recv_data, (client_socket,))
 print ('>> Connect Server')
 
+while True:
+    message = input('')
+    if message == 'quit':
+        close_data = message
+        break
+    client_socket.send(message.encode())
 client_socket.close()
 cv2.destroyAllWindows()
