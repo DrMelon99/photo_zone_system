@@ -11,7 +11,6 @@ client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 client_socket.connect((HOST_IP, HOST_PORT))
 client_socket.sendall('back-pannel'.encode())
 
-
 # image path & name & extension
 image_path = 'D:/github/photo_zone_system/windows/images/'
 def image_output(img_path, img_name, img_extension):
@@ -49,3 +48,11 @@ while True:
     client_socket.send(message.encode())
 client_socket.close()
 cv2.destroyAllWindows()
+
+# move to CVWindow
+# image_path = 'D:/github/photo_zone_system/windows/images/'
+# image = cv2.imread(image_path + 'init_image' + '.jpg')
+# cv2.imshow('image', image)
+
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
